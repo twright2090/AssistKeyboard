@@ -1,26 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function App() {
   const [text, setText] = useState("");
-  const [voice, setVoice] = useState("female");
+  const [voice, setVoice] = useState("");
+  const [voices, setVoices] = useState([]);
   const [keyboard, setKeyboard] = useState("qwerty");
   const [customWords, setCustomWords] = useState(["so", "the"]);
-  const [spokenText, setSpokenText] = useState("");
+
+  useEffect(() => {
+    const loadVoices = () => {
+      const synthVoices = window.speechSynthesis.getVoices();
+      if (synthVoices.length > 0) {
+        setVoices(synthVoices);
+        setVoice(synthVoices[0].name); // Set default
+      }
+    };
+
+    if (typeof speechSynthesis !== "undefined" && speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = loadVoices;
+    }
+    loadVoices();
+  }, []);
 
   const speakText = () => {
-    const voices = speechSynthesis.getVoices();
-    if (!voices.length) {
-      console.warn("No voices loaded yet.");
-      return;
-    }
-  
     const utterance = new SpeechSynthesisUtterance(text);
-    const selectedVoice = voices.find(v => v.name.toLowerCase().includes(voice));
+    const selectedVoice = voices.find(v => v.name === voice);
     if (selectedVoice) utterance.voice = selectedVoice;
     speechSynthesis.speak(utterance);
-    setSpokenText(text);
   };
-  
 
   const handleKeyClick = (char) => {
     setText(prev => prev + char);
@@ -92,8 +99,11 @@ export default function App() {
             value={voice}
             onChange={e => setVoice(e.target.value)}
           >
-            <option value="female">Female</option>
-            <option value="male">Male</option>
+            {voices.map((v, idx) => (
+              <option key={idx} value={v.name}>
+                {v.name} ({v.lang})
+              </option>
+            ))}
           </select>
         </div>
         <div>
@@ -109,6 +119,5 @@ export default function App() {
         </div>
       </div>
     </div>
-    
   );
 }
