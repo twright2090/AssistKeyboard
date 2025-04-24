@@ -1,7 +1,7 @@
-// src/App.jsx
+
 import { Routes, Route } from 'react-router-dom';
 import Home from './Home';
-import Settings from './Settings'; // make sure this exists or create a simple component
+import Settings from './Settings'; 
 
 export default function App() {
   return (
