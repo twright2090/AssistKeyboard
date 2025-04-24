@@ -1,4 +1,4 @@
-// src/Settings.jsx
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -36,7 +36,7 @@ export default function Settings() {
       <h1 className="text-2xl font-bold">Settings</h1>
 
     
-      {/* Voice Selection */}
+     
       <div>
         <label className="block font-semibold">Voice</label>
         <select
