@@ -1,0 +1,45 @@
+/* General Styling */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+/* Text Input Styling */
+#textInput {
+  font-size: 1.25rem;
+  padding: 10px;
+}
+
+/* Keyboard Buttons Styling */
+#keyboard button {
+  width: 40px;
+  height: 40px;
+  margin: 3px;
+  font-size: 1.25rem;
+}
+
+#keyboard .row {
+  margin-bottom: 15px;
+}
+
+/* Custom Words Section */
+#customWordsContainer button {
+  padding: 8px 12px;
+  font-size: 1rem;
+}
+
+#customWordsContainer .btn-danger {
+  font-size: 0.8rem;
+  padding: 5px;
+}
+
+/* Control Buttons */
+button {
+  font-size: 1.25rem;
+  padding: 10px 15px;
+}
+
